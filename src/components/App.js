@@ -1,5 +1,5 @@
 import Login from "./Login";
-import Signin from "./Signin";
+import Signup from "./Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Entries from "./Entries";
 import Outs from "./Outs";
@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/entries" element={<Entries />} />
         <Route path="/outs" element={<Outs />} />
         <Route path="/transactions" element={<Transactions />} />
