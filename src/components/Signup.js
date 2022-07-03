@@ -11,7 +11,8 @@ export default function Signup() {
 
   const navigate = useNavigate();
 
-  function up() {
+  function handleSubmmit(e) {
+    e.preventDefault();
     const URL = "http://127.0.0.1:5000/signup";
     const body = {
       name,
@@ -32,31 +33,33 @@ export default function Signup() {
   return (
     <ContainerOne>
       <header>My Wallet</header>
-      <input
-        type="text"
-        placeholder="Nome"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      ></input>
-      <input
-        type="email"
-        placeholder="E-mail"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      ></input>
-      <input
-        type="password"
-        placeholder="Senha"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      ></input>
-      <input
-        type="password"
-        placeholder="Confirme a senha"
-        value={passwordConfirmation}
-        onChange={(e) => setPasswordConfirmation(e.target.value)}
-      ></input>
-      <button onClick={up}>Cadastrar</button>
+      <form>
+        <input
+          type="text"
+          placeholder="Nome"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        ></input>
+        <input
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        <input
+          type="password"
+          placeholder="Senha"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        ></input>
+        <input
+          type="password"
+          placeholder="Confirme a senha"
+          value={passwordConfirmation}
+          onChange={(e) => setPasswordConfirmation(e.target.value)}
+        ></input>
+      </form>
+      <button onClick={handleSubmmit}>Cadastrar</button>
       <Link to={"/"}>
         <span>Já tem uma conta? Entre agora!</span>
       </Link>

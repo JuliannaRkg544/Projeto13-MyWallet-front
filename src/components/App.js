@@ -2,20 +2,27 @@ import Login from "./Login";
 import Signup from "./Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Entries from "./Entries";
-import Outs from "./Outs";
+import Extracts from "./Extracts";
 import Transactions from "./Transactions";
+import UserContext from "./Context/UserContext";
+import { useState } from "react";
+import Logout from "./Logout";
 
 function App() {
+  const [user, setUser] = useState("");
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/entries" element={<Entries />} />
-        <Route path="/outs" element={<Outs />} />
-        <Route path="/transactions" element={<Transactions />} />
-      </Routes>
-    </BrowserRouter>
+    <UserContext.Provider value={{ user, setUser }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/entries" element={<Entries />} />
+          <Route path="/extracts" element={<Extracts />} />
+          <Route path="/transactions" element={<Transactions />} />
+          {/* <Route path="/logout" element={<Logout />} /> */}
+        </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 

@@ -1,6 +1,6 @@
 import ContainerTwo from "./ContainerTwo";
 
-export default function Outs() {
+export default function Extracts() {
   return (
     <ContainerTwo>
       <header>Nova Saída</header>

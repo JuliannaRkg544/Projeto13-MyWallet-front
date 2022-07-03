@@ -1,17 +1,53 @@
 import styled from "styled-components";
+import Vectorlesss from "../assets/imgs/Vectorlesss.png";
+import Vectorpluss from "../assets/imgs/Vectorpluss.png";
+import Vector from "../assets/imgs/Vector.png";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import UserContext from "./Context/UserContext";
+import { useContext } from "react";
 
 export default function Transactions() {
+  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+
+  function signOut() {
+    const token = user.token;
+    //deletar token do database
+    //navegar para pagina inicial
+    const URL = "http://127.0.0.1:5000/logout";
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get("http://127.0.0.1:5000/logout", {}, config)
+      .then((response) => {
+        navigate("/");
+      })
+      .catch((err) => console.log("erro ao sair :/", err));
+  }
   return (
     <Style>
-      <header>Olá Fulano </header>
+      <header>
+        <span> Olá {user.name}</span>{" "}
+        <img src={Vector} alt="vect" onClick={signOut} />
+      </header>
       <main></main>
       <footer>
-        <div>
-          <p>Nova entrada</p>
-        </div>
-        <div>
-          <p>Nova Saída</p>
-        </div>
+        <Link to={"/entries"}>
+          <div className="bottom">
+            <img id="plus" src={Vectorpluss} alt="plus" />
+            <p>Nova entrada</p>
+          </div>
+        </Link>
+        <Link to={"/extracts"}>
+          <div className="bottom">
+            <img id="less" src={Vectorlesss} alt="less" />
+            <p>Nova Saída</p>
+          </div>
+        </Link>
       </footer>
     </Style>
   );
@@ -38,8 +74,13 @@ const Style = styled.div`
     border-radius: 5px;
     margin-bottom: 13px;
   }
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
   div {
-    width: 50%;
+    width: 100%;
     margin-right: 15px;
     height: 114px;
     background-color: #a328d6;
@@ -47,6 +88,14 @@ const Style = styled.div`
     justify-content: start;
     padding: 15px;
     border-radius: 5px;
+  }
+  a {
+    text-decoration: none;
+  }
+  header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
   }
   div p {
     color: #fff;
@@ -57,7 +106,18 @@ const Style = styled.div`
   }
   footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
+  }
+  #less {
+    width: 9.38px;
+    height: 1.56px;
+  }
+  img {
+    margin-bottom: 20px;
+  }
+  #plus {
+    width: 9.38px;
+    height: 9.38px;
   }
 `;
