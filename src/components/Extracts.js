@@ -23,7 +23,7 @@ export default function Extracts() {
         Authorization: `Bearer ${token}`,
       },
     };
-    const URL = "http://localhost:5000/transactions";
+    const URL = "https://mywalletbackjuliana.herokuapp.com/transactions";
     axios
       .post(URL, body, config)
       .then((response) => {

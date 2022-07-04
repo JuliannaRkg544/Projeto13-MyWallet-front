@@ -13,7 +13,7 @@ export default function Signup() {
 
   function handleSubmmit(e) {
     e.preventDefault();
-    const URL = "http://127.0.0.1:5000/signup";
+    const URL = "https://mywalletbackjuliana.herokuapp.com/signup";
     const body = {
       name,
       email,

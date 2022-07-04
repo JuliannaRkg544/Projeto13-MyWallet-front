@@ -14,7 +14,7 @@ export default function Transactions() {
 
   function signOut() {
     const token = user.token;
-    const URL = "http://127.0.0.1:5000/logout";
+    const URL = "https://mywalletbackjuliana.herokuapp.com/logout";
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -31,11 +31,14 @@ export default function Transactions() {
   useEffect(() => {
     async function render() {
       try {
-        const response = await axios.get("http://127.0.0.1:5000/transactions", {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://mywalletbackjuliana.herokuapp.com/transactions",
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
         console.log(response.data);
         setTransactions(response.data);
       } catch (error) {
