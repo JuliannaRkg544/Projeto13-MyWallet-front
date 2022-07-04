@@ -8,8 +8,7 @@ export default function Entries() {
   const { user } = useContext(UserContext);
   const token = user.token;
   const navigate = useNavigate();
-  //const [task, setTask] = useState({ value: "", desc: "" });
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState();
   const [desc, setDesc] = useState("");
 
   function handleSubmmit(e) {
@@ -25,7 +24,7 @@ export default function Entries() {
       },
     };
     console.log("token das entrdaas ", token);
-    const URL = "http://localhost:5000/entries";
+    const URL = "http://localhost:5000/transactions";
     axios
       .post(URL, body, config)
       .then((response) => {

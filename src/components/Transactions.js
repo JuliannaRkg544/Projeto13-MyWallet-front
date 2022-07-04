@@ -5,16 +5,15 @@ import Vector from "../assets/imgs/Vector.png";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "./Context/UserContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function Transactions() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
+  const [transactions, setTransactions] = useState([]);
 
   function signOut() {
     const token = user.token;
-    //deletar token do database
-    //navegar para pagina inicial
     const URL = "http://127.0.0.1:5000/logout";
     const config = {
       headers: {
@@ -22,11 +21,40 @@ export default function Transactions() {
       },
     };
     axios
-      .get("http://127.0.0.1:5000/logout", {}, config)
+      .get(URL, {}, config)
       .then((response) => {
         navigate("/");
       })
       .catch((err) => console.log("erro ao sair :/", err));
+  }
+
+  useEffect(() => {
+    async function render() {
+      try {
+        const response = await axios.get("http://127.0.0.1:5000/transactions", {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        console.log(response.data);
+        setTransactions(response.data);
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
+
+    render();
+  }, []);
+
+  function build() {
+    console.log("tamanho ", transactions.length);
+    if (transactions.length > 0) {
+      return transactions.map((t, index) => {
+        return <p>{t.desc}</p>;
+      });
+    } else {
+      return <p>Não há registros de entrada ou saída</p>;
+    }
   }
   return (
     <Style>
@@ -34,7 +62,7 @@ export default function Transactions() {
         <span> Olá {user.name}</span>{" "}
         <img src={Vector} alt="vect" onClick={signOut} />
       </header>
-      <main></main>
+      <main>{build()}</main>
       <footer>
         <Link to={"/entries"}>
           <div className="bottom">
