@@ -15,7 +15,7 @@ export default function Transactions() {
 
   function signOut() {
     const token = user.token;
-    const URL = "http://localhost:5000/logout";
+    const URL = `${process.env.REACT_APP_API_URL}/logout`;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -32,11 +32,14 @@ export default function Transactions() {
   useEffect(() => {
     async function render() {
       try {
-        const response = await axios.get("http://localhost:5000/transactions", {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/logout`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
         console.log(response.data);
         setTransactions(response.data);
       } catch (error) {

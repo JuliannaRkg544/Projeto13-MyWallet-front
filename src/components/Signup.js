@@ -13,7 +13,7 @@ export default function Signup() {
 
   function handleSubmmit(e) {
     e.preventDefault();
-    const URL = "http://localhost:5000/signup";
+    const URL = `${process.env.REACT_APP_API_URL}/signup`;
     const body = {
       name,
       email,
