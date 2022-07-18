@@ -45,6 +45,10 @@ const Style = styled.div`
     margin-top: 13px;
     border-radius: 5px;
   }
+  button:hover {
+    filter: brightness(1.2);
+    cursor: pointer;
+  }
   span {
     font-weight: 700;
     color: #fff;

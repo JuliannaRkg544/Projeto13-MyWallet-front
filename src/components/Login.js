@@ -13,7 +13,7 @@ export default function Login() {
 
   function handleSubmmit(e) {
     e.preventDefault();
-    const URL = "https://mywalletbackjuliana.herokuapp.com/";
+    const URL = "http://localhost:5000/";
     const body = {
       email,
       password,

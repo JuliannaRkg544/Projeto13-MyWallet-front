@@ -20,7 +20,7 @@ const Style = styled.div`
   }
   input {
     border: none;
-    width: 100%;
+    min-width: 100%;
     padding: 15px;
     height: 58px;
     margin-top: 13px;
@@ -44,6 +44,10 @@ const Style = styled.div`
     font-weight: 700;
     margin-top: 13px;
     border-radius: 5px;
+  }
+  button:hover {
+    filter: brightness(1.2);
+    cursor: pointer;
   }
   span {
     font-weight: 700;

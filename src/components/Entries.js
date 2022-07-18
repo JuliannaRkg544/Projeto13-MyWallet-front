@@ -24,7 +24,7 @@ export default function Entries() {
       },
     };
     console.log("token das entrdaas ", token);
-    const URL = "https://mywalletbackjuliana.herokuapp.com/transactions";
+    const URL = "http://localhost:5000/transactions";
     axios
       .post(URL, body, config)
       .then((response) => {

@@ -6,7 +6,6 @@ import Extracts from "./Extracts";
 import Transactions from "./Transactions";
 import UserContext from "./Context/UserContext";
 import { useState } from "react";
-import Logout from "./Logout";
 
 function App() {
   const [user, setUser] = useState("");
@@ -19,7 +18,6 @@ function App() {
           <Route path="/entries" element={<Entries />} />
           <Route path="/extracts" element={<Extracts />} />
           <Route path="/transactions" element={<Transactions />} />
-          {/* <Route path="/logout" element={<Logout />} /> */}
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

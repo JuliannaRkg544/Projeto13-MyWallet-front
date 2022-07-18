@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "./Context/UserContext";
 import { useContext, useEffect, useState } from "react";
+import RenderTransaction from "./RenderTransaction";
 
 export default function Transactions() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function Transactions() {
 
   function signOut() {
     const token = user.token;
-    const URL = "https://mywalletbackjuliana.herokuapp.com/logout";
+    const URL = "http://localhost:5000/logout";
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -31,14 +32,11 @@ export default function Transactions() {
   useEffect(() => {
     async function render() {
       try {
-        const response = await axios.get(
-          "https://mywalletbackjuliana.herokuapp.com/transactions",
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
+        const response = await axios.get("http://localhost:5000/transactions", {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
         console.log(response.data);
         setTransactions(response.data);
       } catch (error) {
@@ -53,7 +51,13 @@ export default function Transactions() {
     console.log("tamanho ", transactions.length);
     if (transactions.length > 0) {
       return transactions.map((t, index) => {
-        return <p>{t.desc}</p>;
+        return (
+          <RenderTransaction
+            desc={t.desc}
+            value={t.value}
+            type={t.type}
+          ></RenderTransaction>
+        );
       });
     } else {
       return <p>Não há registros de entrada ou saída</p>;
@@ -105,30 +109,27 @@ const Style = styled.div`
     border-radius: 5px;
     margin-bottom: 13px;
   }
+
   .bottom {
+    width: 95%;
+    height: 114px;
+    background-color: #a328d6;
+    padding: 15px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: start;
   }
-  div {
-    width: 100%;
-    margin-right: 15px;
-    height: 114px;
-    background-color: #a328d6;
-    display: flex;
-    justify-content: start;
-    padding: 15px;
-    border-radius: 5px;
-  }
   a {
     text-decoration: none;
+    width: 100%;
   }
   header {
     display: flex;
     width: 100%;
     justify-content: space-between;
   }
-  div p {
+  .bottom p {
     color: #fff;
     font-size: 17px;
     font-weight: 700;
@@ -137,8 +138,8 @@ const Style = styled.div`
   }
   footer {
     display: flex;
-    justify-content: space-around;
     width: 100%;
+    justify-content: space-between;
   }
   #less {
     width: 9.38px;
