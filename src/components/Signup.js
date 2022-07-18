@@ -10,10 +10,10 @@ export default function Signup() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const navigate = useNavigate();
+  const URL = process.env.REACT_APP_API_URL;
 
   function handleSubmmit(e) {
     e.preventDefault();
-    const URL = `${process.env.REACT_APP_API_URL}/signup`;
     const body = {
       name,
       email,
@@ -22,7 +22,7 @@ export default function Signup() {
     };
 
     axios
-      .post(URL, body)
+      .post(`${URL}/login`, body)
       .then((response) => {
         console.log("eu vim do back", response.data);
         navigate("/");

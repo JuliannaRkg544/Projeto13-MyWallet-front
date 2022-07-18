@@ -20,7 +20,7 @@ export default function Login() {
     };
 
     axios
-      .post(URL, body)
+      .post(`${URL}/`, body)
       .then((response) => {
         // eslint-disable-next-line
         const { token, name } = response.data;

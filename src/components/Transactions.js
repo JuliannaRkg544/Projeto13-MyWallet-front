@@ -12,17 +12,17 @@ export default function Transactions() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [transactions, setTransactions] = useState([]);
+  const URL = process.env.REACT_APP_API_URL;
 
   function signOut() {
     const token = user.token;
-    const URL = `${process.env.REACT_APP_API_URL}/logout`;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
     axios
-      .get(URL, {}, config)
+      .get(`${URL}/logout`, {}, config)
       .then((response) => {
         navigate("/");
       })
@@ -32,14 +32,11 @@ export default function Transactions() {
   useEffect(() => {
     async function render() {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/logout`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${URL}/logout`, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
         console.log(response.data);
         setTransactions(response.data);
       } catch (error) {
