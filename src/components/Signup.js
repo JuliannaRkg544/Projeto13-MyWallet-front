@@ -22,7 +22,7 @@ export default function Signup() {
     };
 
     axios
-      .post(`${URL}/login`, body)
+      .post(`${URL}/signup`, body)
       .then((response) => {
         console.log("eu vim do back", response.data);
         navigate("/");
