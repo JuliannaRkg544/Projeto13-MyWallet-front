@@ -11,6 +11,8 @@ export default function Signup() {
 
   const navigate = useNavigate();
   const URL = process.env.REACT_APP_API_URL;
+  const REACT_APP_API_URL = `${process.env.REACT_APP_API_URL}`
+
 
   function handleSubmmit(e) {
     e.preventDefault();
@@ -22,12 +24,14 @@ export default function Signup() {
     };
 
     axios
-      .post(`${URL}/signup`, body)
+      .post(`${REACT_APP_API_URL}/signup`, body)
       .then((response) => {
         console.log("eu vim do back", response.data);
         navigate("/");
       })
-      .catch((err) => console.log("deu ruim", err));
+      .catch((err) =>{ 
+        alert("Algo deu errado, tente novamente")
+        console.log("deu ruim", err)});
   }
 
   return (

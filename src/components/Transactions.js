@@ -13,6 +13,8 @@ export default function Transactions() {
   const { user } = useContext(UserContext);
   const [transactions, setTransactions] = useState([]);
   const URL = process.env.REACT_APP_API_URL;
+  const REACT_APP_API_URL = `${process.env.REACT_APP_API_URL}`
+
 
   function signOut() {
     const token = user.token;
@@ -22,14 +24,14 @@ export default function Transactions() {
       },
     };
     axios
-      .get(`${URL}/logout`, {}, config)
+      .get(`${REACT_APP_API_URL}/logout`, {}, config)
       .then((response) => {
         navigate("/");
       })
       .catch((err) => console.log("erro ao sair :/", err));
   }
 
-  useEffect(() => {
+ /* useEffect(() => {
     async function render() {
       try {
         const response = await axios.get(`${URL}/logout`, {
@@ -46,9 +48,34 @@ export default function Transactions() {
 
     render();
   }, []);
+  */
+
+  useEffect(() => {
+    console.log("user is", user);
+    async function getUserData() {
+      try {
+        const response = await axios.get(`${REACT_APP_API_URL}/transactions`, {
+          headers: {
+            "Authorization": `Bearer ${user.token}`
+          }
+        });
+        console.log(response);
+        setTransactions(response.data);
+      } catch (error) {
+        alert("Ops! Infelizmente aconteceu um erro! Tente novamente!");
+        console.log(error.response);
+      }
+    }
+
+    getUserData();
+    
+  }, []);
+
+
 
   function build() {
     console.log("tamanho ", transactions.length);
+    console.log("transactions ", transactions );
     if (transactions.length > 0) {
       return transactions.map((t, index) => {
         return (

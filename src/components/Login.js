@@ -14,13 +14,15 @@ export default function Login() {
   function handleSubmmit(e) {
     e.preventDefault();
     const URL = process.env.REACT_APP_API_URL;
+    const REACT_APP_API_URL = `${process.env.REACT_APP_API_URL}`
+
     const body = {
       email,
       password,
     };
 
     axios
-      .post(`${URL}/`, body)
+      .post(`${REACT_APP_API_URL}/`, body)
       .then((response) => {
         // eslint-disable-next-line
         const { token, name } = response.data;
@@ -29,6 +31,7 @@ export default function Login() {
         navigate("/transactions");
       })
       .catch((err) => {
+        alert("Dados inválidos")
         console.log("erro ao logar", err);
       });
   }

@@ -24,9 +24,10 @@ export default function Entries() {
       },
     };
     console.log("token das entrdaas ", token);
+    const REACT_APP_API_URL = `${process.env.REACT_APP_API_URL}/transactions`
     const URL = "http://localhost:5000/transactions";
     axios
-      .post(URL, body, config)
+      .post(REACT_APP_API_URL, body, config)
       .then((response) => {
         console.log(response.data);
         navigate("/transactions");
